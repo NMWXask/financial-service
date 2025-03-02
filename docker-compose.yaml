@@ -1,0 +1,54 @@
+version: '3.3'
+
+services:
+  grafana:
+    container_name: grafana
+    image: bitnami/grafana
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./grafana-data/:/opt/bitnami/grafana/data/
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  prometheus:
+    container_name: prometheus
+    image: bitnami/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-conf/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
+
+  financial-service:
+    container_name: financial-service
+    image: finansial-service
+    build:
+      context: .
+    ports:
+      - "8061:8061"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_DATABASE: postgresql
+      SPRING_LIQUIBASE_CHANGELOG: classpath:db/changelog/db.changelog-master.yaml
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

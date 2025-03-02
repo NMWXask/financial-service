@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: create-table-client_account.sql
+  - include:
+      file: init-table-client_account.sql
