@@ -13,6 +13,8 @@ spring:
         format_sql: true
     show-sql: true
     database: postgresql
+  liquibase:
+    change-log: db.changelog/db.changelog-master.yaml
 
 application:
   name: FINANCIAL-SERVICE
@@ -29,5 +31,3 @@ management:
     prometheus:
       enabled: true
 
-liquibase:
-  change-log: classpath:db/changelog/db.changelog-master.yaml
