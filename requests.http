@@ -1,0 +1,19 @@
+### GET запрос получения всех аккаунтов
+GET http://localhost:8061/api/account/open
+
+### POST запрос для создания аккаунта
+POST http://localhost:8061/api/account/open
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1980-01-01",
+  "accountBalance": 1000.00,
+  "active": true,
+  "accountRating": 4.5,
+  "accountType": "BASE"
+}

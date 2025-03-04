@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: v1/create-table-client_account.sql
-      relativeToChangelogFile: true
-  - include:
-      file: v1/init-table-client_account.sql
-      relativeToChangelogFile: true

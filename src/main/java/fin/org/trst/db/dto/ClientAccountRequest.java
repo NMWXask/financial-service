@@ -1,5 +1,6 @@
 package fin.org.trst.db.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -7,6 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor
@@ -25,4 +30,15 @@ public class ClientAccountRequest {
 
     @Size(min = 8)
     private String password;
+
+    private String phoneNumber;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
+
+    private BigDecimal accountBalance;
+    private boolean active;
+
+    private Double accountRating;
+    private String accountType;
 }

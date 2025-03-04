@@ -36,7 +36,7 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_DATABASE: postgresql
-      SPRING_LIQUIBASE_CHANGELOG: classpath:db/changelog/db.changelog-master.yaml
+      SPRING_LIQUIBASE_CHANGELOG: db/changelog/db.changelog-master.yaml
 
   postgres:
     container_name: postgres

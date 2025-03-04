@@ -1,11 +1,11 @@
 --liquibase formatted sql
--- changeset author:NWMXask-1
+--changeset nwmxask:1.0.0-create-table-client_account failOnError:true
 
-CREATE TABLE client_account (
-                                id BIGSERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS client_account (
+                                id SERIAL PRIMARY KEY,
                                 first_name VARCHAR(50) NOT NULL,
                                 last_name VARCHAR(50) NOT NULL,
-                                email VARCHAR(255) UNIQUE NOT NULL,
+                                email VARCHAR(255) NOT NULL UNIQUE,
                                 password VARCHAR(100) NOT NULL,
                                 phone_number VARCHAR(20),
                                 date_of_birth DATE,
@@ -17,5 +17,7 @@ CREATE TABLE client_account (
                                 account_type VARCHAR(50) NOT NULL
 );
 
--- changeset author:NWMXask-2
-CREATE INDEX idx_client_account_email ON client_account(email);
+-- Добавление ограничений для проверки формата данных
+ALTER TABLE client_account
+    ADD CONSTRAINT chk_phone_number CHECK (phone_number ~ '^\\+?[0-9\\-\\s()]*$'),
+    ADD CONSTRAINT chk_date_of_birth CHECK (date_of_birth < CURRENT_DATE);

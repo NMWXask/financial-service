@@ -3,6 +3,7 @@ package fin.org.trst.service.impl;
 import fin.org.trst.db.dto.ClientAccountRequest;
 import fin.org.trst.db.dto.ClientAccountResponse;
 import fin.org.trst.db.enums.AccountType;
+import fin.org.trst.db.model.ClientAccount;
 import fin.org.trst.db.repository.ClientAccountRepository;
 import fin.org.trst.service.ClientAccountService;
 import fin.org.trst.service.mapper.ClientAccountMapper;
@@ -11,6 +12,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientAccountServiceImpl implements ClientAccountService {
@@ -38,13 +40,17 @@ public class ClientAccountServiceImpl implements ClientAccountService {
     }
 
     @Override
-    public ClientAccountResponse getClientAccountById(Long id) {
-        return null;
+    public Optional<ClientAccountResponse> getClientAccountById(Long id) {
+        clientAccountCounter.increment();
+        return clientAccountRepository.findById(id).map(clientAccountMapper::toClientAccountResponse);
     }
 
     @Override
     public ClientAccountResponse saveClientAccount(ClientAccountRequest clientAccount) {
-        return null;
+        ClientAccount entity = clientAccountMapper.toClientAccount(clientAccount);
+        clientAccountRepository.saveAndFlush(entity);
+        clientAccountCounter.increment();
+        return clientAccountMapper.toClientAccountResponse(entity);
     }
 
     @Override

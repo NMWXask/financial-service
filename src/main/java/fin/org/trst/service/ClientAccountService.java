@@ -5,12 +5,13 @@ import fin.org.trst.db.dto.ClientAccountResponse;
 import fin.org.trst.db.enums.AccountType;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientAccountService {
 
     List<ClientAccountResponse> getClientAccounts();
 
-    ClientAccountResponse getClientAccountById(Long id);
+    Optional<ClientAccountResponse> getClientAccountById(Long id);
 
     ClientAccountResponse saveClientAccount(ClientAccountRequest clientAccount);
 
