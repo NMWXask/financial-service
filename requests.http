@@ -1,5 +1,5 @@
 ### GET запрос получения всех аккаунтов
-GET http://localhost:8061/api/account/open
+GET http://localhost:8061/api/account
 
 ### POST запрос для создания аккаунта
 POST http://localhost:8061/api/account/open
