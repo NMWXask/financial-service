@@ -1,3 +1,8 @@
+#### Предварительные требования
+Убедитесь, что у вас установлены следующие инструменты:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
 ### Локальный запуск в Docker
 docker-compose up --build
 
@@ -42,3 +47,4 @@ Grafana: http://localhost:4000
 ### Reference Documentation
 
 - Коллекция запросов Postman [postman/financial.postman_collection.json](postman/financial.postman_collection.json).
+- Файл с запросами в корне проекта из IDE  [requests.http]
