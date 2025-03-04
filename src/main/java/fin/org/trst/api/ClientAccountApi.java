@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/account")
 public interface ClientAccountApi {
 
-    @GetMapping
+    @GetMapping("/api/account")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<ClientAccountResponse>> getClientAccounts();
 
-    @PostMapping("/open")
+    @PostMapping("/api/account/open")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<ClientAccountResponse> createAccount(@RequestBody ClientAccountRequest clientAccountRequest);
 }
