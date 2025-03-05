@@ -21,7 +21,7 @@ services:
 
   financial-service:
     container_name: financial-service
-    image: finansial-service
+    image: financial-service
     build:
       context: .
     ports:
@@ -36,7 +36,9 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_DATABASE: postgresql
-      SPRING_LIQUIBASE_CHANGELOG: db/changelog/db.changelog-master.yaml
+      SPRING_LIQUIBASE_CHANGELOG: classpath:db/changelog/db.changelog-master.yaml
+    volumes:
+      - ./src/main/resources/db/changelog:/app/resources/db/changelog
 
   postgres:
     container_name: postgres

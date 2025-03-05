@@ -1,17 +1,15 @@
-# Используем официальный образ OpenJDK в качестве базового образа
 FROM openjdk:17-jdk-slim
 
-# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Копируем файл jar вашего приложения в контейнер
 COPY target/financial-service-0.0.1-SNAPSHOT.jar app.jar
 
-# Устанавливаем переменную окружения для указания порта
-ENV SERVER_PORT=8061
+# Добавляем очистку кэша apt
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
-# Открываем порт
-EXPOSE 8061
-
-# Команда для запуска вашего приложения
+# Отдельная инструкция для ENTRYPOINT
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+EXPOSE 8061
