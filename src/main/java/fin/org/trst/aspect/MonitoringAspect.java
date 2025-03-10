@@ -2,7 +2,6 @@ package fin.org.trst.aspect;
 
 import fin.org.trst.annotation.Monitor;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

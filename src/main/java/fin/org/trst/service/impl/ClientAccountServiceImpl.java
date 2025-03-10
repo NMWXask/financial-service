@@ -1,5 +1,6 @@
 package fin.org.trst.service.impl;
 
+import fin.org.trst.annotation.Monitor;
 import fin.org.trst.db.dto.ClientAccountRequest;
 import fin.org.trst.db.dto.ClientAccountResponse;
 import fin.org.trst.db.enums.AccountType;
@@ -28,63 +29,56 @@ public class ClientAccountServiceImpl implements ClientAccountService {
     private static final  String METRIC_NAME = "client_account_requests_total";
 
     @Override
+    @Monitor(metricName = METRIC_NAME)
     public List<ClientAccountResponse> getClientAccounts() {
-        monitoringService.increment(METRIC_NAME);
         return clientAccountRepository.findAll().stream()
                 .map(clientAccountMapper::toClientAccountResponse)
                 .toList();
     }
 
     @Override
+    @Monitor(metricName = METRIC_NAME)
     public Optional<ClientAccountResponse> getClientAccountById(Long id) {
-        monitoringService.increment(METRIC_NAME);
         return clientAccountRepository.findById(id)
                 .map(clientAccountMapper::toClientAccountResponse)
                 .or(() -> {
-                    monitoringService.failure(METRIC_NAME);
                     throw new ClientAccountNotFoundException("Client account with id " + id + " not found.");
                 });
     }
 
     @Override
+    @Monitor(metricName = METRIC_NAME)
     public ClientAccountResponse saveClientAccount(ClientAccountRequest clientAccount) {
-        monitoringService.increment(METRIC_NAME);
         ClientAccount entity = clientAccountMapper.toClientAccount(clientAccount);
         try {
             clientAccountRepository.saveAndFlush(entity);
-            monitoringService.success(METRIC_NAME);
             return clientAccountMapper.toClientAccountResponse(entity);
         } catch (Exception e) {
-            monitoringService.failure(METRIC_NAME);
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
+    @Monitor(metricName = METRIC_NAME)
     public ClientAccountResponse updateClientAccount(ClientAccountRequest clientAccount) {
-        monitoringService.increment(METRIC_NAME);
         ClientAccount entity = clientAccountRepository.findByEmail(clientAccount.getEmail());
         if (entity != null) {
             entity = clientAccountMapper.toClientAccount(clientAccount);
             clientAccountRepository.saveAndFlush(entity);
-            monitoringService.success(METRIC_NAME);
             return clientAccountMapper.toClientAccountResponse(entity);
         } else {
-            monitoringService.failure(METRIC_NAME);
             throw new ClientAccountNotFoundException("Client with email :" + clientAccount.getEmail() + "not found.");
         }
     }
 
     @Override
+    @Monitor(metricName = METRIC_NAME)
     public void deleteClientAccount(ClientAccountRequest clientAccount) {
-        monitoringService.increment(METRIC_NAME);
         ClientAccount entity = clientAccountRepository.findByEmail(clientAccount.getEmail());
         if (entity == null) {
-            monitoringService.failure(METRIC_NAME);
             log.error("Not found entity with email :{}", clientAccount.getEmail());
             throw new ClientAccountNotFoundException("Client with email :" + clientAccount.getEmail() + "not found.");
         }
-        monitoringService.success(METRIC_NAME);
         clientAccountRepository.delete(entity);
     }
 

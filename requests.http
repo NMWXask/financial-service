@@ -23,14 +23,14 @@ POST http://localhost:8061/api/account/open
 Content-Type: application/json
 
 {
-  "firstName": "Melania",
-  "lastName": "Trump",
-  "email": "milka.trucrime@example.com",
-  "password": "passmass",
-  "phoneNumber": "+7719673323",
+  "firstName": "Lyudmila",
+  "lastName": "Putina",
+  "email": "lyuda.crusher99@yandex.corum",
+  "password": "parolParol777",
+  "phoneNumber": "+7911111111",
   "dateOfBirth": "1985-12-11",
-  "accountBalance": 2400000000.00,
+  "accountBalance": 45000000.00,
   "active": true,
-  "accountRating": 4.5,
-  "accountType": "BASE"
+  "accountRating": 5.0,
+  "accountType": "PREMIUM"
 }
