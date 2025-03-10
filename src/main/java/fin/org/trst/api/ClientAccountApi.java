@@ -18,4 +18,11 @@ public interface ClientAccountApi {
     @PostMapping("/api/account/open")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<ClientAccountResponse> createAccount(@RequestBody ClientAccountRequest clientAccountRequest);
+
+    @PatchMapping("api/account/update")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    ResponseEntity<ClientAccountResponse> updateAccount(@RequestBody ClientAccountRequest clientAccountRequest);
+
+    @DeleteMapping("api/account/delete/")
+    ResponseEntity<Void> deleteAccount(@RequestBody ClientAccountRequest clientAccountRequest);
 }

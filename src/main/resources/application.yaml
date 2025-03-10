@@ -31,4 +31,3 @@ management:
   endpoint:
     prometheus:
       enabled: true
-

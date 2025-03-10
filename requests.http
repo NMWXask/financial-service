@@ -1,18 +1,35 @@
 ### GET запрос получения всех аккаунтов
 GET http://localhost:8061/api/account
 
+### DELETE запрос для удаления аккаунта
+DELETE http://localhost:8061/api/account/delete/
+Content-Type: application/json
+
+{
+  "firstName": "Anry",
+  "lastName": "Solovev",
+  "email": "unsupportedemail.solo@example.com",
+  "password": "password456",
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1965-12-02",
+  "accountBalance": 230000000000.00,
+  "active": true,
+  "accountRating": 4.5,
+  "accountType": "PREMIUM"
+}
+
 ### POST запрос для создания аккаунта
 POST http://localhost:8061/api/account/open
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "password": "password123",
-  "phoneNumber": "+1234567890",
-  "dateOfBirth": "1980-01-01",
-  "accountBalance": 1000.00,
+  "firstName": "Melania",
+  "lastName": "Trump",
+  "email": "milka.trucrime@example.com",
+  "password": "passmass",
+  "phoneNumber": "+7719673323",
+  "dateOfBirth": "1985-12-11",
+  "accountBalance": 2400000000.00,
   "active": true,
   "accountRating": 4.5,
   "accountType": "BASE"

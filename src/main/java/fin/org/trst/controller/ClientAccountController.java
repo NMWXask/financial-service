@@ -28,4 +28,16 @@ public class ClientAccountController implements ClientAccountApi {
         ClientAccountResponse savedAccount = clientAccountService.saveClientAccount(clientAccountRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedAccount);
     }
+
+    @Override
+    public ResponseEntity<ClientAccountResponse> updateAccount(ClientAccountRequest clientAccountRequest) {
+        ClientAccountResponse updatedAccount = clientAccountService.updateClientAccount(clientAccountRequest);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedAccount);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteAccount(ClientAccountRequest clientAccountRequest) {
+        clientAccountService.deleteClientAccount(clientAccountRequest);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
